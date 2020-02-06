@@ -18,4 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/churchlist', 'ChurchController@index')->name('churchlist');
+Route::get('/church-list', 'ChurchController@index')->name('church-list');
+Route::post('/add-church', 'ChurchController@create')->name('add-church');
+Route::get('/delete-church', 'ChurchController@index')->name('delete-church');
