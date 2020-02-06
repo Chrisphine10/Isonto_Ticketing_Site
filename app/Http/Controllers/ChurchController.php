@@ -14,7 +14,8 @@ class ChurchController extends Controller
      */
     public function index()
     {
-        //
+        $churches = Church::latest()->paginate(10);
+        return view('church.churchlist', compact('churches'));
     }
 
     /**
