@@ -8,6 +8,8 @@ class Church extends Model
 {
     //Protected $fillable = ['','','']
     Protected $fillable = [
-        'name','description','image_id', 'address', 'location'
+        'name', 'email', 'phone', 'description','image_id', 'address', 'location'
     ];
+
+    protected $table='churches'; 
 }

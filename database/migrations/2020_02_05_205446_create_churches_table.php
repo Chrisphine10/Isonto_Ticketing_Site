@@ -19,9 +19,10 @@ class CreateChurchesTable extends Migration
             $table->string('description');
             $table->string('email');
             $table->string('phone_number');
-            $table->integer('image_id');
-            $table->string('address');
-            $table->integer('location_id');
+            //$table->integer('image_id');
+            //$table->string('address');
+            //$table->integer('location_id');
+            $table->string('password');
             $table->timestamps();
         });
     }

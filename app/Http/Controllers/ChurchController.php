@@ -25,7 +25,7 @@ class ChurchController extends Controller
      */
     public function create()
     {
-        //
+        return view ('church.addchurch');
     }
 
     /**
@@ -36,7 +36,16 @@ class ChurchController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $church = new Church();
+        $church->name = $request->name;
+        $church->email = $request->email;
+        $church->description = $request->description;
+        //$church->address = $request->address;
+        $church->password = $request->password;
+        $church->phone_number = $request->phone;
+        $church->save();
+
+        return view('church.addchurch');
     }
 
     /**
@@ -45,9 +54,11 @@ class ChurchController extends Controller
      * @param  \App\Church  $church
      * @return \Illuminate\Http\Response
      */
-    public function show(Church $church)
+    public function show($id)
     {
-        //
+       $data = Church::find($id);
+
+       return view('church.churchview', ['data' => $data]);
     }
 
     /**
@@ -83,4 +94,15 @@ class ChurchController extends Controller
     {
         //
     }
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+    }
+
+
 }
