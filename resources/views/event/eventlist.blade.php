@@ -5,9 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-14">
             <div class="card">
-                <div class="card-header">{{ __('Churches List') }}
-                <div class="col-sm-2">
-    <a href="{{ route('churches.create')}}" class="btn btn-primary">New Church</a>
+                <div class="card-header">{{ __('Events List') }}
+                <div class="col-sm-4">
+    <a href="{{ route('events.create')}}" class="btn btn-primary">New Events</a>
     </div> 
                 </div>
                 <div class="card-body">
@@ -25,36 +25,36 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Description</th>
+                                <th>Date</th>
                                 <th>Image_id</th>
-                                <th>Address</th>
                                 <th>City</th>
                                 <th>Location_id</th>
                                 <th>Action</th>
                             </tr>
                             <thead>
                             <tbody>
-                                @foreach($churches as $church)
+                                @foreach($events as $event)
                                 <tr>
-                                    <td>{{$church->name}}</td>
-                                    <td>{{$church->description}}</td>
-                                    <td>{{$church->image_id}}</td>
-                                    <td>{{$church->address}}</td>
-                                    <td>{{$church->city}}</td>
-                                    <td>{{$church->location_id}}</td>
+                                    <td>{{$event->name}}</td>
+                                    <td>{{$event->description}}</td>
+                                    <td>{{$event->date}}</td>
+                                    <td>{{$event->image_id}}</td>
+                                    <td>{{$event->city}}</td>
+                                    <td>{{$event->location_id}}</td>
                                     <td>
                                         <div class="btn-toolbar" role="toolbar">
 
-                                            <form action="{{ route('churches.show', $church->id) }}" method="get">
+                                            <form action="{{ route('events.show', $event->id) }}" method="get">
                                                 @csrf
                                                 <button type="submit" class="btn btn-primary" style="margin-right: 1em;">view</button>
                                             </form>
 
-                                            <form action="{{ route('churches.edit', $church->id) }}" method="get">
+                                            <form action="{{ route('events.edit', $event->id) }}" method="get">
                                                 @csrf
                                                 <button type="submit" class="btn btn-secondary" style="margin-right: 1em;">edit</button>
                                             </form>
 
-                                            <form action="{{ route('churches.destroy', $church->id) }}" method="post">
+                                            <form action="{{ route('events.destroy', $event->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger">delete</button>

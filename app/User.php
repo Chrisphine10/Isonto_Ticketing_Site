@@ -36,4 +36,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function myChurch() {
+        return $this->hasOne('App\Church','user_id','id');
+    }
+    public function myComment() {
+        return $this->hasMany('App\Comment','user_id','id');
+    }
+    public function myCommentReaction() {
+        return $this->hasMany('App\Commentreaction','user_id','id');
+    }
+    public function myPostReaction() {
+        return $this->hasMany('App\Postreaction','user_id','id');
+    }
 }

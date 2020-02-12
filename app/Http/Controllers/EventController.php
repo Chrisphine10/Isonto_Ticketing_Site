@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\Image;
+use App\TicketToken;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -14,7 +16,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $events = Event::latest()->paginate(10);
+        return view('event.eventlist', compact('events'));
     }
 
     /**
@@ -24,7 +27,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+        return view('event.addevent');
     }
 
     /**
@@ -35,7 +38,22 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $image = new Image();
+        $image->image_url = $request->image;
+        $image->save();
+        $image_id = $image->id;
+
+        $event = new Event();
+        $event->name = $request->name;
+        $event->description = $request->description;
+        $event->city = $request->city;
+        $event->date = $request->date;
+        $event->church_id = 1;
+        $event->location_id = 1;
+        $event->image_id = $image_id;
+        $event->save();
+
+        return redirect('/events')->with('success', 'Event created!');
     }
 
     /**
@@ -44,9 +62,11 @@ class EventController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $event)
+    public function show($id)
     {
-        //
+        $event = Event::find($id);
+        $ticketToken = TicketToken::where('event_id', '=', $id)->orderBy('created_at', 'desc')->paginate(10);
+        return view('event.viewevent', ['event' => $event, 'tickets' => $ticketToken]);
     }
 
     /**
@@ -55,11 +75,11 @@ class EventController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function edit(Event $event)
+    public function edit($id)
     {
-        //
+        $event = Event::find($id);
+        return view('event.editevent', compact('event'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -67,9 +87,16 @@ class EventController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Event $event)
+    public function update(Request $request, $id)
     {
-        //
+        $event = Event::find($id);
+        $event->name = $request->name;
+        $event->description = $request->description;
+        $event->city = $request->city;
+        $event->date = $request->date;
+        $event->save();
+
+        return redirect('/events')->with('success', 'Event updated!');
     }
 
     /**
@@ -78,8 +105,11 @@ class EventController extends Controller
      * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Event $event)
+    public function destroy($id)
     {
-        //
+        $event = Event::find($id);
+        $event->delete();
+
+        return redirect('/events')->with('success', 'Event deleted!');
     }
 }

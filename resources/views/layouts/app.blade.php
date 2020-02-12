@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Isonto Ticketing Site') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -24,7 +24,22 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    Home
+                </a>
+                <a class="navbar-brand" href="{{ route('churches.index') }}">
+                    Churches
+                </a>
+                <a class="navbar-brand" href="{{ route('events.index') }}">
+                    Events
+                </a>
+                <a class="navbar-brand" href="{{ route('posts.index') }}">
+                    Feeds
+                </a>
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    About Us
+                </a>
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    Contact Us
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

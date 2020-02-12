@@ -7,16 +7,7 @@ use Illuminate\Http\Request;
 
 class PostreactionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -45,29 +36,6 @@ class PostreactionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Postreaction $postreaction)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Postreaction  $postreaction
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Postreaction $postreaction)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Postreaction  $postreaction
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Postreaction $postreaction)
     {
         //
     }

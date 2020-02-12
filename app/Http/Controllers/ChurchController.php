@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Church;
+use App\Image;
 use Illuminate\Http\Request;
 
 class ChurchController extends Controller
@@ -25,7 +26,7 @@ class ChurchController extends Controller
      */
     public function create()
     {
-        return view ('church.addchurch');
+        return view('church.addchurch');
     }
 
     /**
@@ -36,16 +37,33 @@ class ChurchController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $image = new Image();
+        $image->image_url = $request->image;
+        $image->save();
+        $image_id = $image->id;
+
         $church = new Church();
         $church->name = $request->name;
         $church->email = $request->email;
         $church->description = $request->description;
-        //$church->address = $request->address;
+        $church->address = $request->address;
+        $church->city = $request->city;
+        $church->image_id =  $image_id;
+        $church->user_id =  1;
+        $church->location_id = 1;
         $church->password = $request->password;
         $church->phone_number = $request->phone;
         $church->save();
 
-        return view('church.addchurch');
+        //return view('church.addchurch');
+        return redirect('/churches')->with('success', 'Church saved!');
     }
 
     /**
@@ -56,9 +74,9 @@ class ChurchController extends Controller
      */
     public function show($id)
     {
-       $data = Church::find($id);
+        $data = Church::find($id);
 
-       return view('church.churchview', ['data' => $data]);
+        return view('church.churchview', ['data' => $data]);
     }
 
     /**
@@ -67,9 +85,10 @@ class ChurchController extends Controller
      * @param  \App\Church  $church
      * @return \Illuminate\Http\Response
      */
-    public function edit(Church $church)
+    public function edit($id)
     {
-        //
+        $church = Church::find($id);
+        return view('church.editchurch', compact('church'));
     }
 
     /**
@@ -79,9 +98,22 @@ class ChurchController extends Controller
      * @param  \App\Church  $church
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Church $church)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        ]);
+
+        $church = Church::find($id);
+        $church->name = $request->name;
+        $church->email = $request->email;
+        $church->description = $request->description;
+        $church->address = $request->address;
+        $church->city = $request->city;
+        $church->phone_number = $request->phone;
+        $church->save();
+        return redirect('/churches')->with('success', 'Church Updated!');
     }
 
     /**
@@ -90,19 +122,11 @@ class ChurchController extends Controller
      * @param  \App\Church  $church
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Church $church)
+    public function destroy($id)
     {
-        //
+        $church = Church::find($id);
+        $church->delete();
+
+        return redirect('/churches')->with('success', 'Church deleted!');
     }
-
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
-
-
 }

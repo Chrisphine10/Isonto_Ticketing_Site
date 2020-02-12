@@ -7,16 +7,7 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
+   
     /**
      * Show the form for creating a new resource.
      *
@@ -24,7 +15,7 @@ class CommentController extends Controller
      */
     public function create()
     {
-        //
+        return view('post.viewpost');
     }
 
     /**
@@ -35,7 +26,13 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comment = new Comment();     
+        $comment->comment = $request->comment;
+        $comment->post_id = $request->post_id;
+        $comment->user_id = $request->user_id;
+        $comment->save();
+
+        return redirect('/posts')->with('success', 'Comment created!');
     }
 
     /**
@@ -44,9 +41,11 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $comment)
+    public function show($id)
     {
-        //
+        $comment = Comment::find($id);
+
+        return view('post.viewpost', ['comment' => $comment]);
     }
 
     /**
@@ -55,9 +54,10 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comment $comment)
+    public function edit($id)
     {
-        //
+        $comment= Comment::find($id);
+        return view('post.viewpost', compact('comment'));
     }
 
     /**
@@ -67,9 +67,11 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, $id)
     {
-        //
+        $comment = new Comment();     
+        $comment->comment = $request->comment;
+        $comment->save();
     }
 
     /**
@@ -80,6 +82,9 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        //
+        $comment = Comment::find($id);
+        $comment->delete();
+
+        return redirect('/posts/{$request->post_id}')->with('success', 'Comment deleted!');
     }
 }

@@ -2,59 +2,64 @@
 
 namespace App\Http\Controllers;
 
-use App\Image;
 use Illuminate\Http\Request;
 
-class ImageController extends Controller
+class UserController extends Controller
 {
-    
     /**
-     * Store a newly created resource in storage.
+     * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function index()
     {
-        $image->image_url = $request->image;
-        $image->save();
+        return User::find(1)->myCompany;
     }
+
+ 
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Image  $image
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $data = Image::find($id);
+        return User::find(1)->myCompany;
+    }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Image  $image
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $image = Image::find($id);
-        $image->image_url = $request->image;
-        $image->save();
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Image  $image
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $image = Image::find($id);
-        $image->delete();
+        //
     }
 }
