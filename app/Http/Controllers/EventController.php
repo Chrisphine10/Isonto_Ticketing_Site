@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use App\Image;
+use App\Church;
 use App\TicketToken;
+use Storage;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -39,7 +41,9 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $image = new Image();
-        $image->image_url = $request->image;
+        $path = Storage::putFile('public', $request->file('image'));
+        $url = Storage::url($path);
+        $image->image_url = $url;
         $image->save();
         $image_id = $image->id;
 
@@ -65,8 +69,12 @@ class EventController extends Controller
     public function show($id)
     {
         $event = Event::find($id);
+        $image_id = $event->image_id;
+        $church_id = $event->church_id;
         $ticketToken = TicketToken::where('event_id', '=', $id)->orderBy('created_at', 'desc')->paginate(10);
-        return view('event.viewevent', ['event' => $event, 'tickets' => $ticketToken]);
+        $image = Image::find($image_id);
+        $church = Church::find($church_id);
+        return view('event.viewevent', ['event' => $event, 'image' => $image, 'church' => $church]);
     }
 
     /**

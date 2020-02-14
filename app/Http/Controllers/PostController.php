@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Image;
 use App\Comment;
+use Storage;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -17,7 +18,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::latest()->paginate(10);
-        return view('post.postlist', compact('posts'));
+         return view('post.postlist', compact('posts'));
     }
 
     /**
@@ -38,24 +39,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->image) {
-
         $image = new Image();
-        $image->image_url = $request->image;
-        $image->save();
-        $image_id = $image->id;
-
-        }
-
-        $post = new Post();     
+        $path = Storage::putFile('public', $request->file('image'));
+        $url = Storage::url($path);
+        $post = new Post();
+        $post->title = $request->title;     
         $post->body = $request->body;
-        $post->title = $request->title;
-        $post->church_id = 1; //$request->church_id;
-        if ($request->image) {
-            $post->image_id = $image_id;
-        } else {
-            $post->image_id = 0;
-        }
+        $post->church_id = 1;
+        $post->image_url = $url;
         $post->save();
 
         return redirect('/posts')->with('success', 'Post created!');
@@ -72,7 +63,9 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $comments = Comment::where('post_id', '=', $id)->orderBy('created_at', 'desc')->paginate(10);
-        return view('post.viewpost', ['post' => $post, 'comments' => $comments]);
+        $image_id = $post->image_id;
+        $image = Image::find($image_id);
+        return view('post.viewpost', ['post' => $post, 'comments' => $comments, 'image' => $image]);
     }
 
     /**

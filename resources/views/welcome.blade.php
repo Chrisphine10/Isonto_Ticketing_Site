@@ -5,14 +5,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Isonto Ticketing Site</title>
+        <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
+<!-- Fonts -->
+<link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+<!-- Styles -->
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
+                background: #79c5f1;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -85,11 +93,22 @@
                 </div>
 
                 <div class="links">
-                    <a href="{{ route('churches.index') }}">Churches</a>
-                    <a href="{{ route('events.index') }}">Events</a>
-                    <a href="{{ route('posts.index') }}">Feeds</a>
+                    @if (Route::has('login'))
+                    @auth
+                    <form action="/" method="post">
+                        <a href="{{ route('events.index') }}"><button type="button" class="btn btn-danger">Join an Event</button></a>
+                    </form>
+                    @else
+                    <form action="/" method="post">
+                        <a href="{{ route('register') }}"><button type="button" class="btn btn-danger">Join Isonto</button></a>
+                    </form>
+                    @endauth
+            @endif
                 </div>
             </div>
         </div>
+@extends('layouts.footer')
+@section('content')
+@endsection
     </body>
 </html>

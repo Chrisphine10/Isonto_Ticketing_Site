@@ -26,21 +26,6 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Home
                 </a>
-                <a class="navbar-brand" href="{{ route('churches.index') }}">
-                    Churches
-                </a>
-                <a class="navbar-brand" href="{{ route('events.index') }}">
-                    Events
-                </a>
-                <a class="navbar-brand" href="{{ route('posts.index') }}">
-                    Feeds
-                </a>
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    About Us
-                </a>
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Contact Us
-                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -52,7 +37,24 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
+                    
                     <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{ route('events.create') }}">
+                   New Event
+                </a></li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{ route('churches.index') }}">
+                    Churches
+                </a></li>
+                <li class="nav-item">
+                <a class="nav-link" href="{{ route('events.index') }}">
+                    Events
+                </a></li>
+                <li class="nav-item">
+                <a class="nav-link" href="{{ route('posts.index') }}">
+                    Blog
+                </a></li>
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
@@ -90,6 +92,9 @@
         <main class="py-4">
             @yield('content')
         </main>
+@extends('layouts.footer')
+@section('content')
+@endsection
     </div>
 </body>
 </html>

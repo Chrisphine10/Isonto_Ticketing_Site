@@ -36,7 +36,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+/*
     public function myChurch() {
         return $this->hasOne('App\Church','user_id','id');
     }
@@ -49,4 +49,5 @@ class User extends Authenticatable
     public function myPostReaction() {
         return $this->hasMany('App\Postreaction','user_id','id');
     }
+    */
 }

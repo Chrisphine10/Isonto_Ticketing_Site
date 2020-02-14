@@ -26,7 +26,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return User::find(1)->myCompany;
+        return User::find(1);
     }
 
     /**

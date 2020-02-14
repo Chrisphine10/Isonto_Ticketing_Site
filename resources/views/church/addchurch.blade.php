@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Add Church Account') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('churches.store') }}">
+                    <form method="POST" action="{{ route('churches.store') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">

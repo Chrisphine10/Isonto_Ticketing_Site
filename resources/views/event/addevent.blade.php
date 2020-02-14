@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Add New Event') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('events.store') }}">
+                    <form method="POST" action="{{ route('events.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>

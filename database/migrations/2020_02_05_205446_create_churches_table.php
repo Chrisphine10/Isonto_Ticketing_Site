@@ -19,7 +19,8 @@ class CreateChurchesTable extends Migration
             $table->string('description');
             $table->string('email');
             $table->string('phone_number');
-            $table->integer('image_id')->nullable;
+            $table->integer('images_id')->nullable();
+            $table->string('image_url');
             $table->string('user_id');
             $table->string('address');
             $table->string('city');

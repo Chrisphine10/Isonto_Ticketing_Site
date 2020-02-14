@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Church;
 use App\Image;
+use App\User;
+use Storage;
 use Illuminate\Http\Request;
 
 class ChurchController extends Controller
@@ -45,7 +47,9 @@ class ChurchController extends Controller
         ]);
 
         $image = new Image();
-        $image->image_url = $request->image;
+        $path = Storage::putFile('public', $request->file('image'));
+        $url = Storage::url($path);
+        $image->image_url = $url;
         $image->save();
         $image_id = $image->id;
 
@@ -62,7 +66,6 @@ class ChurchController extends Controller
         $church->phone_number = $request->phone;
         $church->save();
 
-        //return view('church.addchurch');
         return redirect('/churches')->with('success', 'Church saved!');
     }
 
@@ -74,9 +77,10 @@ class ChurchController extends Controller
      */
     public function show($id)
     {
-        $data = Church::find($id);
-
-        return view('church.churchview', ['data' => $data]);
+        $church = Church::find($id);
+        $search_id = $church->image_id;
+        $image = Image::find($search_id);
+        return view('church.churchview', ['church' => $church, 'image' => $image]);
     }
 
     /**
