@@ -11,15 +11,20 @@
                 <div class="row">
                 
                 @foreach($posts as $post)
-                    <div class="col-lg-3">
+                    <div class="col-lg-4 col-md-10">
                     <div class="card">
                 <div class="card-body">
                     <div><a href="">
-                <img src="" alt="church_profile_image" height="300px" width="300px">
+                <img src="{{ $post->image_url}}" alt="church_profile_image" height="300px" width="300px">
                 </a>
                 </div>
                     </div>
-                <div class="card-header">{{ $post->title }} </div>
+               <div class="card-header">{{ $post->title }}<br>
+               <form action="{{ route('posts.show', $post->id) }}" method="get">
+                                                @csrf
+                                                <button type="submit" class="btn btn-primary" style="margin-right: 1em;">Read More</button>
+                                            </form>
+               </div>
                 </div>
                     </div> 
                 @endforeach

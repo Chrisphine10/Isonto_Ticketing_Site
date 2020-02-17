@@ -49,9 +49,6 @@ class ChurchController extends Controller
         $image = new Image();
         $path = Storage::putFile('public', $request->file('image'));
         $url = Storage::url($path);
-        $image->image_url = $url;
-        $image->save();
-        $image_id = $image->id;
 
         $church = new Church();
         $church->name = $request->name;
@@ -59,7 +56,7 @@ class ChurchController extends Controller
         $church->description = $request->description;
         $church->address = $request->address;
         $church->city = $request->city;
-        $church->image_id =  $image_id;
+        $church->image_url =  $url;
         $church->user_id =  1;
         $church->location_id = 1;
         $church->password = $request->password;

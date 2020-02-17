@@ -9,7 +9,7 @@
 
                 <div class="card-body">
                     <div>
-                <img src="{{ $image->image_url }}" alt="event_profile_image" height="300px" width="400px">
+                <img src="{{ $post->image_url }}" alt="event_profile_image" height="300px" width="400px">
                 </div>
                 <hr>
                 <p> Posted on: 
@@ -28,7 +28,7 @@
                             <div class="col-md-6">
                                 <textarea type="text" style="height: 100px;" required class="form-control" id="comment" name='comment' placeholder="Enter your comment"></textarea><br>
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('comment') }}
+                                    {{ __('Comments') }}
                                 </button>
                             </div>
                         </div>

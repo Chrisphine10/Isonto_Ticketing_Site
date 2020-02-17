@@ -12,7 +12,7 @@
                 <div class="row">
                 <div class="col-lg-6 col-md-8">
                 <div>
-                <img src="{{ $image->image_url }}" alt="event_profile_image" height="300px" width="300px">
+                <img src="{{ $event->image_url }}" alt="event_profile_image" height="300px" width="300px">
                 </div>
                 <hr>
                 <div class="card">

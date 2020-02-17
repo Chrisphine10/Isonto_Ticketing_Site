@@ -42,6 +42,7 @@ class PostController extends Controller
         $image = new Image();
         $path = Storage::putFile('public', $request->file('image'));
         $url = Storage::url($path);
+        
         $post = new Post();
         $post->title = $request->title;     
         $post->body = $request->body;

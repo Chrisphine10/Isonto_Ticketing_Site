@@ -43,9 +43,6 @@ class EventController extends Controller
         $image = new Image();
         $path = Storage::putFile('public', $request->file('image'));
         $url = Storage::url($path);
-        $image->image_url = $url;
-        $image->save();
-        $image_id = $image->id;
 
         $event = new Event();
         $event->name = $request->name;
@@ -54,7 +51,7 @@ class EventController extends Controller
         $event->date = $request->date;
         $event->church_id = 1;
         $event->location_id = 1;
-        $event->image_id = $image_id;
+        $event->image_url = $url;
         $event->save();
 
         return redirect('/events')->with('success', 'Event created!');

@@ -2,7 +2,8 @@
     margin: 0;
     padding: 38px;
     padding-bottom: 0!important;
-    background: #79c5f1;
+    background: rgb(51, 49, 53);
+    color: rgba(242, 245, 241, 0.795)!important;
 }
 
 .email {
