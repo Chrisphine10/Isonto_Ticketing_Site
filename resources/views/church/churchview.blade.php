@@ -9,19 +9,14 @@
 
                 <div class="card-body">
                 <div class="container">
+
                 <div class="row">
                 <div class="col-lg-6 col-md-8">
                 <div>
-                <img src="{{ $church->image_url }}" alt="church_profile_image" height="300px" width="300px">
+                <img src="{{ $church->image_url }}" alt="church_profile_image" height="300px" width="380px">
                 </div>
                 <hr>
-                <div class="card">
-                <div class="card-header">About Us</div>
-                <div class="col-lg-10 col-md-10">
-<p>{{ $church->description }}</p>
-</div>
-</div>
-</div>
+                </div>
 <div class="col-lg-5 col-md-5">
 <div><p><strong>Location:</strong>
 {{ $church->city }}
@@ -33,17 +28,28 @@
 {{ $church->phone_number }}
 </p>
 </div>
-<div>
-</div>
-</div>
 </div>
 
+</div>
+
+<div class="row">
+
+<div class="col-lg-12">
+                <div class="card">
+                <div class="card-header">About Us</div>
+<p>{{ $church->description }}</p>
+</div>
+</div>
+
+</div>
+
+
+</div>
+</div>
 
 
 
 
-
-                </div>
             </div>
         </div>
     </div>

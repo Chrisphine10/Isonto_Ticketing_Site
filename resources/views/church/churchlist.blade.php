@@ -13,18 +13,16 @@
                 @foreach($churches as $church)
                     <div class="col-lg-4 col-md-10">
                     <div class="card">
-                <div class="card-body">
-                    <div><a href="">
-                <img src="{{ $church->image_url}}" alt="church_profile_image" height="300px" width="300px">
-                </a>
-                </div>
-                    </div>
-               <div class="card-header">{{ $church->name }}<br>
+                    <img src="{{ $church->image_url}}" alt="church_profile_image" height="300px">
+                <div class="card-body text-center">
+                <div class="card-title"><strong>{{ $church->name }}</strong><br>
                <form action="{{ route('churches.show', $church->id) }}" method="get">
                                                 @csrf
                                                 <button type="submit" class="btn btn-primary" style="margin-right: 1em;">View Church</button>
                                             </form>
                </div>
+                    </div>
+               
                 </div>
                     </div> 
                 @endforeach

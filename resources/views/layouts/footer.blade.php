@@ -5,8 +5,12 @@
     <div class="row">
         <div class="col-md-3 mt-md-0 mt-3">
         
-        <h3>Wesbite Name</h3>
-        <p>Isonto Ticketing App</p>
+        <h4>Isonto Ticketing App</h4>
+        <ul class="list-unstyled list-group list-group">
+    <li><a href="#" class="">Help</a></li>
+    <li><a href="#" class="">About Us</a></li>
+    <li><a href="#" class="">Privacy Policy</a></li>
+    </ul>
         </div>
         
       <hr class="clearfix w-100 d-md-none pb-3">
@@ -18,12 +22,12 @@
         </ul>
 </div>
 <hr class="clearfix w-100 d-md-none pb-3">
-<div class="col-md-3 mb-md-0 mb-3">
-    <h4 class="text">Contact Us</h4>
-    <p class="phone"><i class="fa fa-phone"></i><span style="margin-left: 4px;">+254-757255710</span></p><br>
-    <p class="envelope"><i class="fa fa-envelope"></i><span style="margin-left: 4px;">ondiekchrisphine@gmail.com</span></p><br>
+<div class="col-md-2 col-lg-3 mb-md-0 mb-3">
+    <h4 style="margin-left: 30px;" class="text">Contact Us</h4>
+    <p style="margin-left: 30px; margin-top: 0px; padding: 0px;" class="phone"><i class="fa fa-phone"></i><span style="margin-left: 4px;">+254-757255710</span></p>
+    <p style="margin-left: 30px; margin-top: 0px; padding: 0px;" class="envelope"><i class="fa fa-envelope"></i><span style="margin-left: 4px;">ondiekchrisphine@gmail.com</span></p>
     <ul class="list-unstyled list-group list-group-horizontal-sm">
-    <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+    <li style="margin-left: 30px;"><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
     <li style="margin-left: 30px;"><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
     <li style="margin-left: 30px;"><a href="#" class="instagram"><i class="fa fa-instagram"></i></a></li>
     <li style="margin-left: 30px;"><a href="#" class="github"><i class="fa fa-github"></i></a></li>

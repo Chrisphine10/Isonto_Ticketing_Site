@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use Illuminate\Http\Request;
-
+use App\Session;
 class CommentController extends Controller
 {
    
@@ -57,7 +57,7 @@ class CommentController extends Controller
     public function edit($id)
     {
         $comment= Comment::find($id);
-        return view('post.viewpost', compact('comment'));
+        return view('comment.editcomment', compact('comment'));
     }
 
     /**
@@ -69,9 +69,15 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $comment = new Comment();     
+        $comment = Comment::find($id);    
         $comment->comment = $request->comment;
+        $post_id = $comment->post_id;
         $comment->save();
+        Session::flash('url',Request::server('HTTP_REFERER')); 
+        
+       // return redirect('#')->with('success', 'Comment updated!');
+      // return redirect()->back()->with('success', 'Comment updated!');
+      return Redirect::to(Session::get('url'));  
     }
 
     /**
@@ -80,11 +86,12 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy($id)
     {
         $comment = Comment::find($id);
+        $post_id = $comment->post_id;
         $comment->delete();
 
-        return redirect('/posts/{$request->post_id}')->with('success', 'Comment deleted!');
+        return redirect('/posts/{$post_id}')->with('success', 'Comment deleted!');
     }
 }

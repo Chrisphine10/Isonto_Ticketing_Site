@@ -8,8 +8,8 @@
                 <div class="card-header"><strong>{{ $post->title }}</strong></div>
 
                 <div class="card-body">
-                    <div>
-                <img src="{{ $post->image_url }}" alt="event_profile_image" height="300px" width="400px">
+                    <div class="text-center">
+                <img src="{{ $post->image_url }}" alt="event_profile_image" style="max-width: 600px;">
                 </div>
                 <hr>
                 <p> Posted on: 
@@ -20,7 +20,7 @@
 </p><hr>
                     <div class="card">
                     <div class="card-header"><strong>comment</strong></div>
-    <div class="card-body">
+    <div class="card-body card-edit">
     <div class="container">
                     <form method="POST" action="{{ route('comments.store') }}" enctype="multipart/form-data">
                         @csrf
@@ -39,10 +39,11 @@
                     <p>
                     
                     @foreach($comments as $comment)
-                    
-                     <p>{{ $comment->user_id }}: {{ $comment->comment }}</p>
-                     
-                     <br>
+                    <form action="{{ route('comments.edit', $comment->id) }}" method="get">
+                        <p><span>{{ $comment->user_id }}: {{ $comment->comment }}</span>
+                        <input type="submit" class="btn" value="edit">
+                    </form>
+                    </p>
 
                     @endforeach
                     

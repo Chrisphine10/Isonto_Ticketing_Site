@@ -9,6 +9,7 @@
 
                 <div class="card-body">
                 <div class="container">
+
                 <div class="row">
                 <div class="col-lg-6 col-md-8">
                 <div>
@@ -42,9 +43,9 @@
                                 </button>
                     </form>
 </div>
+
 </div>
 </div>
-                 </div>
             </div>
         </div>
     </div>

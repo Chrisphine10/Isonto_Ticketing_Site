@@ -28,6 +28,10 @@
                 margin: 0;
             }
 
+.box {
+    background-image: url("/image/image1.jpg");
+    background-size: cover;
+}
             .full-height {
                 height: 100vh;
             }
@@ -72,6 +76,7 @@
         </style>
     </head>
     <body>
+    <div class="box">
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -91,7 +96,6 @@
                 <div class="title m-b-md">
                     Isonto Ticketing Site
                 </div>
-
                 <div class="links">
                     @if (Route::has('login'))
                     @auth
@@ -106,6 +110,7 @@
             @endif
                 </div>
             </div>
+        </div>
         </div>
 @extends('layouts.footer')
 @section('content')
