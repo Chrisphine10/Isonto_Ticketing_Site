@@ -50,4 +50,9 @@
 &copy; Copyright <span class="font-weight-bold">Isonto Ticketing Site</span>. All rights Reserved<br>
 Designed by <a href="#">Pheene</a></p>
 </div>
+@if(Session::has('error'))
+<div class="alert alert-danger">
+  {{ Session::get('error')}}
+</div>
+@endif
 </footer>

@@ -49,6 +49,8 @@ class EventController extends Controller
         $event->description = $request->description;
         $event->city = $request->city;
         $event->date = $request->date;
+        $event->venue = $request->venue;
+        $event->time = $request->time;
         $event->church_id = 1;
         $event->location_id = 1;
         $event->image_url = $url;
@@ -97,6 +99,8 @@ class EventController extends Controller
         $event = Event::find($id);
         $event->name = $request->name;
         $event->description = $request->description;
+        $event->venue = $request->venue;
+        $event->time = $request->time;
         $event->city = $request->city;
         $event->date = $request->date;
         $event->save();

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 class UserController extends Controller
 {
     /**
@@ -11,12 +10,21 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return User::find(1)->myCompany;
+        
+        if ($request->session()->exists('users')) {
+           
+            //$request->session()->flush();
+            return $value;
+        } 
+        else {
+            $user_id = \Auth::User()->id;
+            return $user_id;
+        }
     }
 
- 
+  
 
     /**
      * Display the specified resource.
@@ -24,9 +32,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        return User::find(1);
+        $value = $request->session()->get('users');
     }
 
     /**

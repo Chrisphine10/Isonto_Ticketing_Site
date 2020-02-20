@@ -18,8 +18,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  
 </head>
 <body>
+    @if ($message = Session::get('error'))
+    <div class="alert alert-success">
+        <p>{{ $message }}</p>
+    </div>
+     @endif
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-secondary shadow-sm">
             <div class="container">
@@ -40,10 +46,6 @@
                     
                     <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                    <a class="nav-link" href="{{ route('events.create') }}">
-                   New Event
-                </a></li>
-                    <li class="nav-item">
                     <a class="nav-link" href="{{ route('churches.index') }}">
                     Churches
                 </a></li>
@@ -53,7 +55,7 @@
                 </a></li>
                 <li class="nav-item">
                 <a class="nav-link" href="{{ route('posts.index') }}">
-                    Blog
+                    Feeds
                 </a></li>
                         <!-- Authentication Links -->
                         @guest
@@ -72,12 +74,22 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    
+                                    <a class="dropdown-item" href="{{ route('churches.create') }}">
+                                        Create Church
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('events.create') }}">
+                                        New Event
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('posts.create') }}">
+                                        New Blog
+                                    </a>
+                                    
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Log out') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>

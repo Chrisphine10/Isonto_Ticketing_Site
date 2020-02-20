@@ -9,7 +9,6 @@
                     <div class="card-body">
 
                 <div class="row">
-                
                 @foreach($posts as $post)
                     <div class="col-lg-4 col-md-10" style="margin-bottom: 20px;">
                     <div class="card text-center">

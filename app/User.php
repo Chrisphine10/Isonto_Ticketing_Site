@@ -16,9 +16,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'hasChurch', 'image_url'
     ];
-
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -36,7 +35,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-/*
+
+    
     public function myChurch() {
         return $this->hasOne('App\Church','user_id','id');
     }
@@ -49,5 +49,4 @@ class User extends Authenticatable
     public function myPostReaction() {
         return $this->hasMany('App\Postreaction','user_id','id');
     }
-    */
 }

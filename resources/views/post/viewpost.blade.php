@@ -1,10 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-14 col-lg-10">
             <div class="card">
+                @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
                 <div class="card-header"><strong>{{ $post->title }}</strong></div>
 
                 <div class="card-body">
@@ -41,9 +47,9 @@
                     @foreach($comments as $comment)
                     <form action="{{ route('comments.edit', $comment->id) }}" method="get">
                         <p><span>{{ $comment->user_id }}: {{ $comment->comment }}</span>
-                        <input type="submit" class="btn" value="edit">
+                        <input style="color: blue;" type="submit" class="btn" value="edit">
                     </form>
-                    </p>
+                    </p><hr>
 
                     @endforeach
                     
@@ -57,4 +63,6 @@
         </div>
     </div>
 </div>
+
+
 @endsection

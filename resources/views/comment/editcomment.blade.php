@@ -22,14 +22,14 @@
                                     {{ __('Submit') }}
                                 </button>
                             </div>
-                        </div>
+                        </div><br>
                     </form>
-
+<div class="col-md-6 offset-md-4">
                     <form action="{{ route('comments.destroy', $comment->id) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger">delete</button>
-                                            </form>
+                                            </form></div>
 
                 </div>
             </div>

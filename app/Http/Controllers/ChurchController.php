@@ -57,7 +57,7 @@ class ChurchController extends Controller
         $church->address = $request->address;
         $church->city = $request->city;
         $church->image_url =  $url;
-        $church->user_id =  1;
+        $church->user_id = \Auth::User()->id;
         $church->location_id = 1;
         $church->password = $request->password;
         $church->phone_number = $request->phone;

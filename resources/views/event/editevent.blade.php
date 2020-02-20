@@ -30,9 +30,21 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="venue" class="col-md-4 col-form-label text-md-right">Venue</label>
+                            <div class="col-md-6">
+                                <input type="text" required class="form-control" id="venue" name='venue' value={{ $event->venue }}>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="date" class="col-md-4 col-form-label text-md-right">Date of Event</label>
                             <div class="col-md-6">
                                 <input type="date" required class="form-control" id="date" name='date' value={{ $event->date }}>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="time" class="col-md-4 col-form-label text-md-right">Time of Event</label>
+                            <div class="col-md-6">
+                                <input type="time" required class="form-control" id="time" name='time' value={{ $event->time }}>
                             </div>
                         </div>
                         <div class="form-group row mb-0">

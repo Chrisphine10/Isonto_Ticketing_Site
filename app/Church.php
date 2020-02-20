@@ -11,4 +11,12 @@ class Church extends Model
     ];
 
     protected $table='churches'; 
+
+    public function myEvents() {
+        return $this->hasMany('App\Event','event_id','id');
+    }
+
+    public function myBlogs() {
+        return $this->hasMany('App\Blog','blog_id','id');
+    }
 }

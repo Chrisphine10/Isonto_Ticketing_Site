@@ -16,8 +16,9 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/session', 'UserController@show');
+Route::get('/allsession', 'UserController@index');
 Route::resource('churches', 'ChurchController');
 Route::resource('events', 'EventController');
 Route::resource('images', 'ImageController');
