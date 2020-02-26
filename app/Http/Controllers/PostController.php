@@ -46,7 +46,7 @@ class PostController extends Controller
         $post = new Post();
         $post->title = $request->title;     
         $post->body = $request->body;
-        $post->church_id = 1;
+        $post->user_id = \Auth::User()->id;
         $post->image_url = $url;
         $post->save();
 
@@ -64,7 +64,7 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $comments = Comment::where('post_id', '=', $id)->orderBy('created_at', 'desc')->paginate(10);
-        $image_id = $post->image_id;
+        $image_id = $post->images_id;
         $image = Image::find($image_id);
         return view('post.viewpost', ['post' => $post, 'comments' => $comments, 'image' => $image]);
     }

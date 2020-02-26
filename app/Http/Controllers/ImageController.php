@@ -17,6 +17,9 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         $image->image_url = $request->image;
+        $image->church_id = $request->church_id;
+        $image->post_id = $request->post_id;
+        $image->event_id = $request->event_id;
         $image->save();
     }
 
@@ -42,6 +45,9 @@ class ImageController extends Controller
     public function update(Request $request, $id)
     {
         $image = Image::find($id);
+        $image->church_id = $request->church_id;
+        $image->post_id = $request->post_id;
+        $image->event_id = $request->event_id;
         $image->image_url = $request->image;
         $image->save();
     }

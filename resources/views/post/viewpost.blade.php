@@ -21,6 +21,13 @@
                 <p> Posted on: 
 {{ $post->created_at->diffForHumans() }}
 </p>
+
+<form action="{{ route('posts.edit', $post->id) }}" method="get">
+    @guest
+    @else
+    <input style="color: blue;" type="submit" class="btn" value="edit post">
+    @endguest
+</form>
 <hr> <p>
 {{ $post->body }}
 </p><hr>
@@ -32,22 +39,25 @@
                         @csrf
                         <div class="form-group row">
                             <div class="col-md-6">
+                                
+                        <input type="number" hidden name="post_id" id="post_id" value={{ $post->id }}> 
                                 <textarea type="text" style="height: 100px;" required class="form-control" id="comment" name='comment' placeholder="Enter your comment"></textarea><br>
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Comments') }}
                                 </button>
                             </div>
-                        </div>
-                        <input type="number" hidden name="user_id" id="user_id" value=12>
-                        <input type="number" hidden name="post_id" id="post_id" value={{ $post->id }}>
-                        
-                    </form> <hr>
+                        </div> 
+                    </form>
+                    <hr>
                     <p>
                     
                     @foreach($comments as $comment)
                     <form action="{{ route('comments.edit', $comment->id) }}" method="get">
                         <p><span>{{ $comment->user_id }}: {{ $comment->comment }}</span>
+                        @guest
+                        @else
                         <input style="color: blue;" type="submit" class="btn" value="edit">
+                        @endguest
                     </form>
                     </p><hr>
 

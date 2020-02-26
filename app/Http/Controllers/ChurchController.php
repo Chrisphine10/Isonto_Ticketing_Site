@@ -42,8 +42,7 @@ class ChurchController extends Controller
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users']
         ]);
 
         $image = new Image();
@@ -56,11 +55,10 @@ class ChurchController extends Controller
         $church->description = $request->description;
         $church->address = $request->address;
         $church->city = $request->city;
-        $church->image_url =  $url;
+        $church->phone_number = $request->phone;
+        $church->image_url = $url;
         $church->user_id = \Auth::User()->id;
         $church->location_id = 1;
-        $church->password = $request->password;
-        $church->phone_number = $request->phone;
         $church->save();
 
         return redirect('/churches')->with('success', 'Church saved!');
@@ -75,8 +73,7 @@ class ChurchController extends Controller
     public function show($id)
     {
         $church = Church::find($id);
-        $search_id = $church->image_id;
-        $image = Image::find($search_id);
+        $image = Image::where('church_id', '=', $id)->orderBy('created_at', 'desc')->paginate(10);
         return view('church.churchview', ['church' => $church, 'image' => $image]);
     }
 

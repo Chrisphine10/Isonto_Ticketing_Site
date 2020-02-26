@@ -11,4 +11,5 @@ class TicketToken extends Model
      ];
      
      protected $table='ticket_tokens'; 
+
 }

@@ -36,17 +36,25 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    
-    public function myChurch() {
-        return $this->hasOne('App\Church','user_id','id');
+    public function post() {
+        return $this->hasMany('App\Post');
     }
-    public function myComment() {
-        return $this->hasMany('App\Comment','user_id','id');
+    public function event() {
+        return $this->hasMany('App\Event');
+    }    
+    public function church() {
+        return $this->hasOne('App\Church');
     }
-    public function myCommentReaction() {
-        return $this->hasMany('App\Commentreaction','user_id','id');
+    public function comment() {
+        return $this->hasMany('App\Comment');
     }
-    public function myPostReaction() {
-        return $this->hasMany('App\Postreaction','user_id','id');
+    public function commentReaction() {
+        return $this->hasMany('App\Commentreaction');
+    }
+    public function postReaction() {
+        return $this->hasMany('App\Postreaction');
+    }
+    public function ticket() {
+        return $this->hasMany('App\TicketToken');
     }
 }

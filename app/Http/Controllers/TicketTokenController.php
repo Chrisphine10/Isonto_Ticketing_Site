@@ -18,7 +18,7 @@ class TicketTokenController extends Controller
     public function store(Request $request)
     {
         $ticketToken = new TicketToken();     
-        $ticketToken->user_id = $request->user_id;
+        $ticketToken->user_id = \Auth::User()->id;
         $ticketToken->event_id = $request->event_id;
         $ticketToken->token =  bcrypt(rand(1, 100000000));
         $ticketToken->save();
@@ -34,7 +34,7 @@ class TicketTokenController extends Controller
      */
     public function show($id)
     {
-        $ticketToken = TicketToken::find($id);
+        $ticketToken = TicketToken::find($id)->myTicket();
          return view('event.viewevent', ['ticket' => $ticketToken]);
     }
 

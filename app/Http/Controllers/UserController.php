@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 class UserController extends Controller
 {
@@ -12,16 +13,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        
-        if ($request->session()->exists('users')) {
-           
-            //$request->session()->flush();
-            return $value;
-        } 
-        else {
-            $user_id = \Auth::User()->id;
-            return $user_id;
-        }
+        $users = User::latest()->paginate(10);
+        return $users;
     }
 
   
@@ -32,9 +25,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show($id)
     {
-        $value = $request->session()->get('users');
+        $user = User::find($id);
     }
 
     /**
@@ -68,6 +61,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+
+        return $user;
     }
 }
