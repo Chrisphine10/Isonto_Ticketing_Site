@@ -18,7 +18,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/session', 'UserController@show');
 
-
 Route::resource('churches', 'ChurchController')->middleware('auth')->except(['index', 'show']);
 Route::resource('churches', 'ChurchController')->only(['index', 'show']);
 
