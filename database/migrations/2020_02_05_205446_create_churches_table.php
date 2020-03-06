@@ -20,7 +20,7 @@ class CreateChurchesTable extends Migration
             $table->string('email');
             $table->string('phone_number');
             $table->string('image_url');
-            $table->string('user_id');
+            $table->integer('user_id');
             $table->string('address');
             $table->string('city');
             $table->integer('location_id')->nullable;

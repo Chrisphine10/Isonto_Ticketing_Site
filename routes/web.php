@@ -15,10 +15,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 Auth::routes();
+
+
+Route::filter('isOwnerOfPost', function() {
+    if(Route::resource('churches', 'ChurchController')->middleware('auth')->except(['index', 'show'])->user_id !==  \Auth::id()) {
+       abort(403);
+    };
+    if(Route::input('posts')->user_id !==  \Auth::id()) {
+        abort(403);
+     };
+   });
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/session', 'UserController@show');
 
-Route::resource('churches', 'ChurchController')->middleware('auth')->except(['index', 'show']);
 Route::resource('churches', 'ChurchController')->only(['index', 'show']);
 
 Route::resource('images', 'ImageController')->middleware('auth')->except(['index', 'show']);

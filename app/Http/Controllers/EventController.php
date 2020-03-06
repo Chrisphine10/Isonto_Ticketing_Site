@@ -68,10 +68,10 @@ class EventController extends Controller
     public function show($id)
     {
         $event = Event::find($id);
-        $church_id = $event->church_id;
+        $user_id = $event->user_id;
         $ticketToken = TicketToken::where('event_id', '=', $id)->orderBy('created_at', 'desc')->paginate(10);
-        $image = Image::where('event_id', '=', $id)->orderBy('created_at', 'desc')->paginate(10);
-        $church = Church::find($church_id);
+        $image = Image::where('event_id', '=', $id);
+        $church = Church::find($user_id);
         return view('event.viewevent', ['event' => $event, 'image' => $image, 'church' => $church]);
     }
 

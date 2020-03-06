@@ -40,11 +40,6 @@ class ChurchController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users']
-        ]);
-
         $image = new Image();
         $path = Storage::putFile('public', $request->file('image'));
         $url = Storage::url($path);

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Church extends Model
 {
     Protected $fillable = [
-        'name', 'email', 'phone_number', 'description','image_url', 'address', 'city', 'user_id'
+        'name', 'email', 'phone_number', 'description','image_url', 'address', 'city', 'user_id', 'location_id'
     ];
 
     protected $table='churches'; 
