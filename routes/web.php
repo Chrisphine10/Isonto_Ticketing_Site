@@ -16,19 +16,10 @@ Route::get('/', function () {
 });
 Auth::routes();
 
-
-Route::filter('isOwnerOfPost', function() {
-    if(Route::resource('churches', 'ChurchController')->middleware('auth')->except(['index', 'show'])->user_id !==  \Auth::id()) {
-       abort(403);
-    };
-    if(Route::input('posts')->user_id !==  \Auth::id()) {
-        abort(403);
-     };
-   });
-
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/session', 'UserController@show');
 
+Route::resource('churches', 'ChurchController')->middleware('auth')->except(['index', 'show']);
 Route::resource('churches', 'ChurchController')->only(['index', 'show']);
 
 Route::resource('images', 'ImageController')->middleware('auth')->except(['index', 'show']);
@@ -46,13 +37,20 @@ Route::resource('events', 'EventController')->only(['index', 'show']);
 Route::resource('ticketTokens', 'TicketTokenController')->middleware('auth')->except(['index', 'show']);
 Route::resource('ticketTokens', 'TicketTokenController')->only(['index', 'show']);
 
+
+Route::resource('adminchurch', 'AdminChurchController')->middleware('auth');
+Route::resource('adminevent', 'AdminEventController')->middleware('auth');
+Route::resource('adminpost', 'AdminPostController')->middleware('auth');
+Route::resource('users', 'UserController')->middleware('auth');
+//Route::get('users', 'UserController@index')->name('users');
 // Route::get('churches', 'ChurchController@index')->name('churches');
-// Route::get('churches/{churches}', 'ChurchController@show');
+// Route::get('churches/list', 'ChurchController@listindex')->name("church");
+// Route::get('churches/{church}', 'ChurchController@show');
 // Route::get('churches/create', 'ChurchController@create')->middleware('auth');
 // Route::post('churches', 'ChurchController@store')->middleware('auth');
-// Route::get('churches/{churches}/edit', 'ChurchController@edit')->middleware('auth');
-// Route::patch('churches/{churches}', 'ChurchController@update')->middleware('auth');
-// Route::delete('churches/{churches}', 'ChurchController@destroy')->middleware('auth');
+// Route::get('churches/{church}/edit', 'ChurchController@edit')->middleware('auth');
+// Route::patch('churches/{church}', 'ChurchController@update')->middleware('auth');
+// Route::delete('churches/{church}', 'ChurchController@destroy')->middleware('auth');
 
 
 // Route::get('events', 'EventController@index')->name('events');

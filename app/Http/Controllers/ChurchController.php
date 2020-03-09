@@ -17,8 +17,10 @@ class ChurchController extends Controller
      */
     public function index()
     {
+
         $churches = Church::latest()->paginate(10);
         return view('church.churchlist', compact('churches'));
+        
     }
 
     /**
@@ -28,7 +30,12 @@ class ChurchController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Church::class);
+        if(Church::where('user_id', \Auth::user()->id )->exists()){
+            return redirect('/churches')->with('success', 'Church saved!');
+           }else {            
         return view('church.addchurch');
+           }
     }
 
     /**
@@ -39,7 +46,11 @@ class ChurchController extends Controller
      */
     public function store(Request $request)
     {
-
+        $this->authorize('create', Church::class);
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        ]);
         $image = new Image();
         $path = Storage::putFile('public', $request->file('image'));
         $url = Storage::url($path);
@@ -80,6 +91,7 @@ class ChurchController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('create', Church::class);
         $church = Church::find($id);
         return view('church.editchurch', compact('church'));
     }
@@ -93,6 +105,7 @@ class ChurchController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('create', Church::class);
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -117,9 +130,11 @@ class ChurchController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('create', Church::class);
         $church = Church::find($id);
         $church->delete();
 
         return redirect('/churches')->with('success', 'Church deleted!');
     }
+
 }

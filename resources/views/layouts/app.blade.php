@@ -74,10 +74,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    
+                                    @can('create', App\Church::class)
+                                    @if(App\Church::where('user_id', \Auth::user()->id )->exists())
+                                    @else
                                     <a class="dropdown-item" href="{{ route('churches.create') }}">
                                         Create Church
                                     </a>
+                                    @endif
+                                    @endcan
                                     <a class="dropdown-item" href="{{ route('events.create') }}">
                                         New Event
                                     </a>

@@ -25,7 +25,9 @@
 <form action="{{ route('posts.edit', $post->id) }}" method="get">
     @guest
     @else
+    @can('create', App\Church::class)
     <input style="color: blue;" type="submit" class="btn" value="edit post">
+    @endcan
     @endguest
 </form>
 <hr> <p>

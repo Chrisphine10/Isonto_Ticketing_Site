@@ -27,6 +27,19 @@
 <p><strong>Phone Number:</strong>
 {{ $church->phone_number }}
 </p>
+@if($church->user_id == \Auth::id())
+
+<form action="{{ route('churches.edit', $church->id) }}" method="get">
+    @csrf
+    <button type="submit" class="btn btn-secondary" style="margin-right: 1em;">edit</button>
+</form>
+
+<form action="{{ route('churches.destroy', $church->id) }}" method="post">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn btn-danger">delete</button>
+</form>
+@endif
 </div>
 </div>
 
@@ -37,7 +50,8 @@
 <div class="col-lg-12">
                 <div class="card">
                 <div class="card-header">About Us</div>
-<p>{{ $church->description }}</p>
+<p>{{ $church->description }}</p> 
+
 </div>
 </div>
 

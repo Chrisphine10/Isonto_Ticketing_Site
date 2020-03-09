@@ -28,6 +28,7 @@ class PostController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Post::class);
         return view('post.addpost');
     }
 
@@ -39,6 +40,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Post::class);
         $image = new Image();
         $path = Storage::putFile('public', $request->file('image'));
         $url = Storage::url($path);
@@ -77,6 +79,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('create', Post::class);
         $post= Post::find($id);
         return view('post.editpost', compact('post'));
     }
@@ -90,6 +93,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('create', Post::class);
         $post = Post::find($id);
         $post->body = $request->body;
         $post->title = $request->title;
@@ -106,6 +110,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('create', Post::class);
         $post = Post::find($id);
         $post->delete();
 

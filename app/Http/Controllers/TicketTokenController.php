@@ -20,7 +20,7 @@ class TicketTokenController extends Controller
         $ticketToken = new TicketToken();     
         $ticketToken->user_id = \Auth::User()->id;
         $ticketToken->event_id = $request->event_id;
-        $ticketToken->token =  bcrypt(rand(1, 100000000));
+        $ticketToken->token =  bcrypt(rand(1, 10));
         $ticketToken->save();
 
         return redirect('/events')->with('success', 'Joined!');

@@ -13,8 +13,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::latest()->paginate(10);
-        return $users;
+        $users = User::latest()->get();
+        return view('user.userlist', compact('users'));
     }
 
   
@@ -36,10 +36,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
+    // public function edit($id)
+    // {
+
+    //     // $user = User::find($id)->update($request->all());
+    //     // return response()->json($post);
+    //     // $user = User::where('role', request('role'))->update(request()->all());
+    //     // return response()->json($post);
+
+    //     $user = User::find($id);
+    //     return view('event.editevent', compact('event'));
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -50,7 +57,10 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->role = $request->role;
+        $user->save();
+        return redirect('/users')->with('success', 'Changed Role!');
     }
 
     /**

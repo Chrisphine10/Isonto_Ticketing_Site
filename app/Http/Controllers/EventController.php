@@ -29,6 +29,7 @@ class EventController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Event::class);
         return view('event.addevent');
     }
 
@@ -40,6 +41,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Event::class);
         $image = new Image();
         $path = Storage::putFile('public', $request->file('image'));
         $url = Storage::url($path);
@@ -70,9 +72,9 @@ class EventController extends Controller
         $event = Event::find($id);
         $user_id = $event->user_id;
         $ticketToken = TicketToken::where('event_id', '=', $id)->orderBy('created_at', 'desc')->paginate(10);
-        $image = Image::where('event_id', '=', $id);
-        $church = Church::find($user_id);
-        return view('event.viewevent', ['event' => $event, 'image' => $image, 'church' => $church]);
+        $images = Image::where('event_id', '=', $id)->orderBy('created_at', 'desc')->get();
+        $church = Church::where('user_id', '=', $user_id)->orderBy('created_at', 'desc')->get();
+        return view('event.viewevent', ['event' => $event, 'images' => $images, 'church' => $church, 'ticket' => $ticketToken]);
     }
 
     /**
@@ -83,6 +85,7 @@ class EventController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('create', Event::class);
         $event = Event::find($id);
         return view('event.editevent', compact('event'));
     }
@@ -95,6 +98,7 @@ class EventController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('create', Event::class);
         $event = Event::find($id);
         $event->name = $request->name;
         $event->description = $request->description;
@@ -115,6 +119,7 @@ class EventController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('create', Event::class);
         $event = Event::find($id);
         $event->delete();
 

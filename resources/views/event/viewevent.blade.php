@@ -33,6 +33,7 @@
 <p><strong>Phone Number:</strong>
 {{ $church->phone_number }}
 </p>
+@if($event->user_id == \Auth::id())
                     <form method="POST" action="{{ route('ticketTokens.store') }}">
                         @csrf
                         <input type="number" hidden name="user_id" id="user_id" value=12>
@@ -42,6 +43,20 @@
                                     {{ __('Join Event') }}
                                 </button>
                     </form>
+@else
+
+<form action="{{ route('events.edit', $event->id) }}" method="get">
+    @csrf
+    <button type="submit" class="btn btn-secondary" style="margin-right: 1em;">edit</button>
+</form>
+
+<form action="{{ route('events.destroy', $event->id) }}" method="post">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn btn-danger">delete</button>
+</form>
+
+@endif
 </div>
 
 </div>
