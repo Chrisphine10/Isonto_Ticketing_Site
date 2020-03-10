@@ -28,6 +28,9 @@ Route::resource('images', 'ImageController')->only(['index', 'show']);
 Route::resource('comments', 'CommentController')->middleware('auth')->except(['index', 'show']);
 Route::resource('comments', 'CommentController')->only(['index', 'show']);
 
+Route::resource('eventcomments', 'EventCommentController')->middleware('auth')->except(['index', 'show']);
+Route::resource('eventcomments', 'EventCommentController')->only(['index', 'show']);
+
 Route::resource('posts', 'PostController')->middleware('auth')->except(['index', 'show']);
 Route::resource('posts', 'PostController')->only(['index', 'show']);
 
@@ -37,6 +40,8 @@ Route::resource('events', 'EventController')->only(['index', 'show']);
 Route::resource('ticketTokens', 'TicketTokenController')->middleware('auth')->except(['index', 'show']);
 Route::resource('ticketTokens', 'TicketTokenController')->only(['index', 'show']);
 
+Route::resource('churchMembers', 'ChurchMemberController')->middleware('auth')->except(['index', 'show']);
+Route::resource('churchMembers', 'ChurchMemberController')->only(['index', 'show']);
 
 Route::resource('adminchurch', 'AdminChurchController')->middleware('auth');
 Route::resource('adminevent', 'AdminEventController')->middleware('auth');

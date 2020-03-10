@@ -37,7 +37,7 @@
                     <form method="POST" action="{{ route('ticketTokens.store') }}">
                         @csrf
                         <input type="number" hidden name="user_id" id="user_id" value=12>
-                        <input type="number" hidden name="event_id" id="post_id" value={{ $event->id }}>
+                        <input type="number" hidden name="event_id" id="event_id" value={{ $event->id }}>
                         
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Join Event') }}
@@ -60,6 +60,44 @@
 </div>
 
 </div>
+</div>
+<div class="card">
+    <div class="card-header"><strong>comment</strong></div>
+<div class="card-body card-edit">
+<div class="container">
+    <form method="POST" action="{{ route('eventcomments.store') }}" enctype="multipart/form-data">
+        @csrf
+        <div class="form-group row">
+            <div class="col-md-6">
+                
+        <input type="number" hidden name="event_id" id="event_id" value={{ $event->id }}> 
+                <textarea type="text" style="height: 100px;" required class="form-control" id="comment" name='comment' placeholder="Enter your comment"></textarea><br>
+                <button type="submit" class="btn btn-primary">
+                    {{ __('Comments') }}
+                </button>
+            </div>
+        </div> 
+    </form>
+    <hr>
+    <p>
+    
+    @foreach($eventcomments as $eventcomment)
+    <form action="{{ route('eventcomments.edit', $eventcomment->id) }}" method="get">
+        <p><span>{{ $eventcomment->user_id }}: {{ $eventcomment->comment }}</span>
+        @guest
+        @else
+        <input style="color: blue;" type="submit" class="btn" value="edit">
+        @endguest
+    </form>
+    </p><hr>
+
+    @endforeach
+    
+    </p>
+</div>
+
+</div>
+    </div>
 </div>
             </div>
         </div>

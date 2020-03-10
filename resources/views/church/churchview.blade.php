@@ -39,6 +39,16 @@
     @method('DELETE')
     <button type="submit" class="btn btn-danger">delete</button>
 </form>
+@else
+<form method="POST" action="{{ route('churchMembers.store') }}">
+    @csrf
+    <input type="number" hidden name="user_id" id="user_id" value=12>
+    <input type="number" hidden name="church_id" id="church_id" value={{ $church->id }}>
+    
+            <button type="submit" class="btn btn-primary">
+                {{ __('Join Church') }}
+            </button>
+</form>
 @endif
 </div>
 </div>
