@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use App\Image;
+use App\EventComment;
 use App\Church;
 use App\TicketToken;
 use Storage;
@@ -69,12 +70,13 @@ class EventController extends Controller
      */
     public function show($id)
     {
-        $event = Event::find($id);
+        $event = Event::findOrFail($id);
         $user_id = $event->user_id;
-        $ticketToken = TicketToken::where('event_id', '=', $id)->orderBy('created_at', 'desc')->paginate(10);
+        $eventcomments = EventComment::where('event_id', '=', $id)->orderBy('created_at', 'desc')->firstOrFail();
+        $ticketToken = TicketToken::where('event_id', '=', $id)->orderBy('created_at', 'desc')->get();
         $images = Image::where('event_id', '=', $id)->orderBy('created_at', 'desc')->get();
-        $church = Church::where('user_id', '=', $user_id)->orderBy('created_at', 'desc')->get();
-        return view('event.viewevent', ['event' => $event, 'images' => $images, 'church' => $church, 'ticket' => $ticketToken]);
+        $church = Church::where('user_id', '=', $user_id)->orderBy('created_at', 'desc')->firstOrFail();
+        return view('event.viewevent', ['event' => $event, 'images' => $images, 'church' => $church, 'ticket' => $ticketToken, 'eventcomments' => $eventcomments]);
     }
 
     /**

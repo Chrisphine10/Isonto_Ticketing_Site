@@ -49,7 +49,7 @@ class ChurchController extends Controller
         $this->authorize('create', Church::class);
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:churches'],
         ]);
         $image = new Image();
         $path = Storage::putFile('public', $request->file('image'));

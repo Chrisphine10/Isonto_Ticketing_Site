@@ -46,9 +46,9 @@ class EventCommentController extends Controller
      */
     public function show($id)
     {
-        $eventcomment = EventComment::find($id);
+        $eventcomments = EventComment::findorFail($id);
 
-        return view('post.viewpost', ['eventcomment' => $eventcomment]);
+        return view('event.viewevent', ['eventcomments' => $eventcomments]);
     }
 
     /**
@@ -59,7 +59,7 @@ class EventCommentController extends Controller
      */
     public function edit($id)
     {
-        $eventcomment= EventComment::find($id);
+        $eventcomment= EventComment::findorFail($id);
         return view('comment.editeventcomment', compact('comment'));
     }
 
@@ -90,7 +90,7 @@ class EventCommentController extends Controller
      */
     public function destroy($id)
     {
-        $comment = EventComment::find($id);
+        $comment = EventComment::findorFail($id);
         $event_id = $comment->event_id;
         $comment->delete();
 
