@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<script src="https://cdn.tiny.cloud/1/tmypxrzwbm1lcbf2zxcfh2pz4pqe2zq6bqo2pday5lcyh8qc/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -19,7 +20,7 @@
                         <div class="form-group row">
                             <label for="body" class="col-md-4 col-form-label text-md-right">Body</label>
                             <div class="col-md-6">
-                                <textarea type="text" style="height: 200px;" required class="form-control" id="body" name='body' placeholder="Enter your post"></textarea>
+                                <textarea style="height: 200px;" class="form-control" id="body" name='body' placeholder="Enter your post"></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -41,4 +42,21 @@
         </div>
     </div>
 </div>
+<script>
+    tinymce.init({
+    selector: 'textarea',
+    height: 300,
+    menubar: false,
+    plugins: [
+        'fullscreen advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code',
+        'insertdatetime media table paste code help wordcount'
+    ],
+    toolbar: 'fullscreen undo redo | formatselect | ' +
+    'bold italic backcolor | alignleft aligncenter ' +
+    'alignright alignjustify | bullist numlist outdent indent | ' +
+    'removeformat | help',
+    content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+    });
+  </script>
 @endsection

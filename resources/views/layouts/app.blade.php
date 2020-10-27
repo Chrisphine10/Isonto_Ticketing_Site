@@ -80,8 +80,6 @@
                                     <a class="dropdown-item" href="{{ route('churches.create') }}">
                                         Create Church
                                     </a>
-                                    @endif
-                                    @endcan
                                     <a class="dropdown-item" href="{{ route('events.create') }}">
                                         New Event
                                     </a>
@@ -89,6 +87,9 @@
                                         New Blog
                                     </a>
                                     
+                                    @endif
+                                    @endcan
+                                   
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

@@ -10,7 +10,7 @@ class EventComment extends Model
         'comment', 'user_id', 'event_id',
     ];
 
-    protected $table='comments'; 
+    protected $table='event_comments'; 
 
     public function eventcomment() {
         return $this->belongsTo('App\Event');

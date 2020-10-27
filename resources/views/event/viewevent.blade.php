@@ -33,6 +33,8 @@
 <p><strong>Phone Number:</strong>
 {{ $church->phone_number }}
 </p>
+@guest
+@else
 @if($event->user_id == \Auth::id())
                     <form method="POST" action="{{ route('ticketTokens.store') }}">
                         @csrf
@@ -57,6 +59,7 @@
 </form>
 
 @endif
+@endguest
 </div>
 
 </div>
@@ -83,7 +86,10 @@
     
     @foreach($eventcomments as $eventcomment)
     <form action="{{ route('eventcomments.edit', $eventcomment->id) }}" method="get">
-        <p><span>{{ $eventcomment->user_id }}: {{ $eventcomment->comment }}</span>
+    <?php
+        $user = App\User::find($eventcomment->user_id);
+    ?>
+        <p><span>{{ $user->name }}: {{ $eventcomment->comment }}</span>
         @guest
         @else
         <input style="color: blue;" type="submit" class="btn" value="edit">
@@ -103,4 +109,5 @@
         </div>
     </div>
 </div>
+
 @endsection

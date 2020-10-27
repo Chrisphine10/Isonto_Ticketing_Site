@@ -3,21 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\EventComment;
+use App\User;
 use Illuminate\Http\Request;
 
 class EventCommentController extends Controller
 {
-   /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $eventComment = EventComment::latest()->paginate(10);
-        return view('event.viewevent', compact('events'));
-    }
-
+  
     /**
      * Store a newly created resource in storage.
      *
@@ -26,9 +17,9 @@ class EventCommentController extends Controller
      */
     public function store(Request $request)
     {
-        $comment = new EventComment();     
+        $comment = new EventComment();   
         $comment->comment = $request->comment;
-        $comment->post_id = $request->event_id;
+        $comment->event_id = $request->event_id;
         $comment->user_id = \Auth::User()->id;
         $comment->save();
         $event_id = $comment->event_id;
@@ -47,7 +38,6 @@ class EventCommentController extends Controller
     public function show($id)
     {
         $eventcomments = EventComment::findorFail($id);
-
         return view('event.viewevent', ['eventcomments' => $eventcomments]);
     }
 
@@ -60,7 +50,7 @@ class EventCommentController extends Controller
     public function edit($id)
     {
         $eventcomment= EventComment::findorFail($id);
-        return view('comment.editeventcomment', compact('comment'));
+        return view('comment.editeventcomment', compact('eventcomment'));
     }
 
     /**

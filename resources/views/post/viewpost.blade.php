@@ -55,7 +55,10 @@
                     
                     @foreach($comments as $comment)
                     <form action="{{ route('comments.edit', $comment->id) }}" method="get">
-                        <p><span>{{ $comment->user_id }}: {{ $comment->comment }}</span>
+                    <?php
+                        $user = App\User::find($comment->user_id);
+                    ?>
+                        <p><span>{{ $user->name }}: {{ $comment->comment }}</span>
                         @guest
                         @else
                         <input style="color: blue;" type="submit" class="btn" value="edit">

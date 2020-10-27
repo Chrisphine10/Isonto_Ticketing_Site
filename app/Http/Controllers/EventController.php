@@ -72,7 +72,7 @@ class EventController extends Controller
     {
         $event = Event::findOrFail($id);
         $user_id = $event->user_id;
-        $eventcomments = EventComment::where('event_id', '=', $id)->orderBy('created_at', 'desc')->firstOrFail();
+        $eventcomments = EventComment::where('event_id', '=', $id)->orderBy('created_at', 'desc')->get();
         $ticketToken = TicketToken::where('event_id', '=', $id)->orderBy('created_at', 'desc')->get();
         $images = Image::where('event_id', '=', $id)->orderBy('created_at', 'desc')->get();
         $church = Church::where('user_id', '=', $user_id)->orderBy('created_at', 'desc')->firstOrFail();
