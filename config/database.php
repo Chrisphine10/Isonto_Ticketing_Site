@@ -95,7 +95,7 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
         ],
-        'my_mysql' =>  array(
+        'my_mysql' => [
             'driver' => 'mysql',
             'host' => $host,
             'database' => $database,
@@ -104,7 +104,7 @@ return [
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
-        ),
+        ],
 
     ],
 
