@@ -25,7 +25,7 @@
     <div class="alert alert-success">
         <p>{{ $message }}</p>
     </div>
-     @endif
+    @endif
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-secondary shadow-sm">
             <div class="container">
@@ -76,15 +76,15 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     @can('create', App\Church::class)
                                     @if(App\Church::where('user_id', \Auth::user()->id )->exists())
-                                    @else
-                                    <a class="dropdown-item" href="{{ route('churches.create') }}">
-                                        Create Church
-                                    </a>
                                     <a class="dropdown-item" href="{{ route('events.create') }}">
                                         New Event
                                     </a>
                                     <a class="dropdown-item" href="{{ route('posts.create') }}">
                                         New Blog
+                                    </a>
+                                    @else
+                                    <a class="dropdown-item" href="{{ route('churches.create') }}">
+                                        Create Church
                                     </a>
                                     
                                     @endif
