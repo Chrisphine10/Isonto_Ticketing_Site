@@ -95,18 +95,18 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
         ],
+        'my_mysql' =>  array(
+            'driver' => 'mysql',
+            'host' => $host,
+            'database' => $database,
+            'username' => $username,
+            'password' => $password,
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+        ),
 
     ],
-    'my_mysql' =>  array(
-        'driver' => 'mysql',
-        'host' => $host,
-        'database' => $database,
-        'username' => $username,
-        'password' => $password,
-        'charset' => 'utf8',
-        'collation' => 'utf8_unicode_ci',
-        'prefix' => '',
-    ),
 
     /*
     |--------------------------------------------------------------------------
