@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Str;
-$url = 'CLEARDB_DATABASE_URL';
+$url = CLEARDB_DATABASE_URL;
 
 $host = $url["host"];
 $username = $url["user"];
