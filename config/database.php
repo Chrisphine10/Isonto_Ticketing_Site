@@ -15,8 +15,13 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'my_mysql'),
+    $url = 'CLEARDB_DATABASE_URL';
 
+    $host = $url["host"];
+    $username = $url["user"];
+    $password = $url["pass"];
+    $database = substr($url["path"], 1);
     /*
     |--------------------------------------------------------------------------
     | Database Connections
@@ -92,6 +97,16 @@ return [
         ],
 
     ],
+    'my_mysql' =>  array(
+        'driver' => 'mysql',
+        'host' => $host,
+        'database' => $database,
+        'username' => $username,
+        'password' => $password,
+        'charset' => 'utf8',
+        'collation' => 'utf8_unicode_ci',
+        'prefix' => '',
+    ),
 
     /*
     |--------------------------------------------------------------------------
